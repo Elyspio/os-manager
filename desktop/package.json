@@ -1,0 +1,26 @@
+{
+  "name": "@android-windows-link/desktop",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "argparse": "^1.0.10",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "winston": "^3.3.3",
+    "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "@types/argparse": "^1.0.38",
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "scripts": {
+    "dev-client": "nodemon client/server/client.ts",
+    "dev-server": "nodemon server/server/server.ts",
+    "dev": "concurrently -n client,server npm:dev-*"
+  }
+}
