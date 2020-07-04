@@ -22,7 +22,7 @@ export function createServer(): Express {
     app.get("/", (req, res) => {
         res.json(ClientsManager.instance.toJSON());
     })
-    app.get("/:target/:command", async (req: Request.ServerHardwarePowerActions, res) => {
+    app.post("/:target/:command", async (req: Request.ServerHardwarePowerActions, res) => {
         const targetUrl = ClientsManager.get(req.params.target).host
         await axios.post(`http://${targetUrl}/config`, {
             type: req.params.command
