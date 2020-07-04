@@ -10,13 +10,12 @@ const mapStateToProps = (state: StoreState) => ({
     computer: state.computer.current
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-})
+const mapDispatchToProps = (dispatch: Dispatch) => ({})
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxTypes = ConnectedProps<typeof connector>;
 
-interface Props extends  ReduxTypes{
+interface Props extends ReduxTypes {
 
 }
 
@@ -24,9 +23,10 @@ export class Body extends Component<Props> {
     render() {
         return (
             <View>
-                <Text>Computer: {this.props.computer ? this.props.computer.name: null}</Text>
+                <Text>Computer: {this.props.computer ? this.props.computer.name : null}</Text>
             </View>
         );
     }
 }
+
 export default connector(Body);

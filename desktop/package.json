@@ -19,8 +19,8 @@
     "typescript": "^3.9.6"
   },
   "scripts": {
-    "dev-client": "nodemon client/server/client.ts",
-    "dev-server": "nodemon server/server/server.ts",
+    "dev-client": "nodemon client/index.ts",
+    "dev-server": "nodemon server/index.ts",
     "dev": "concurrently -n client,server npm:dev-*"
   }
 }

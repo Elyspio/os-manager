@@ -5,16 +5,23 @@ import {Provider as ReduxProvider} from "react-redux"
 import Header from "./app/components/Header";
 import {store} from "./app/data/store";
 import Body from "./app/components/Body"
-export function App() {
+import {getComputers, setComputers} from "./app/data/computer-manager/actions";
+import {fetchServer} from "./app/core/server";
 
+export class App extends React.Component {
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <Header title={"Android Windows Link"}/>
-            <Body/>
+    componentDidMount() {
+    }
 
-        </SafeAreaView>
-    );
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <Header title={"Android Windows Link"}/>
+                <Body/>
+
+            </SafeAreaView>
+        );
+    }
 }
 
 const theme = {

@@ -1,31 +1,41 @@
 import * as express from "express"
-import {ArgumentParser} from "argparse"
+import {Express} from "express"
 import {logger} from "../util/logger";
-import {expressPort} from "../config/const";
 import * as  bodyParser from "body-parser";
+import {Request} from "./types";
+import {ClientsManager} from "../core/clients-manager";
+import {default as axios} from "axios"
+import * as cors from "cors"
 
-
-if(require.main === module) {
-
-    logger.debug("Starting ")
-
-    const parser = new ArgumentParser();
-    parser.addArgument("--port", {type: "int", defaultValue: expressPort})
-    const {port} = parser.parseArgs();
-
+export function createServer(): Express {
     const app = express();
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json())
+    app.use(cors())
 
-    app.post("/register", ((req, res) => {
-        logger.info("register ips: ",  req.body.ips)
+    app.post("/register", ((req: Request.Register, res) => {
+        logger.info("register ips: ", {client: req.body})
+        ClientsManager.instance.register({name: req.body.name, host: req.body.ips[0]})
         res.send("");
     }))
 
-    app.listen(port, async () => {
-        logger.info(`express client is listening on port ${port}`)
+    app.get("/", (req, res) => {
+        res.json(ClientsManager.instance.toJSON());
     })
+    app.get("/:target/:command", async (req: Request.ServerHardwarePowerActions, res) => {
+        const targetUrl = ClientsManager.get(req.params.target).host
+        await axios.post(`http://${targetUrl}/config`, {
+            type: req.params.command
+        })
+        res.send("");
+    })
+
+
+    return app;
+
 }
+
+
 
 
 

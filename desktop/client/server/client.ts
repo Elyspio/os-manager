@@ -1,32 +1,26 @@
 import * as express from "express"
-import {ArgumentParser} from "argparse"
-import {logger} from "../util/logger";
-import {expressPort} from "../config/const";
-import {register} from "../core/http";
-
 import * as  bodyParser from "body-parser";
+import {Request} from "./types";
+import {Operation} from "../core/hardware";
+import * as cors from "cors"
 
-if (require.main === module) {
 
-    const parser = new ArgumentParser();
-    parser.addArgument("--port", {type: "int", defaultValue: expressPort})
-    const {port} = parser.parseArgs();
-
+export function createServer() {
     const app = express();
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json())
+    app.use(cors());
 
-    app.listen(port, () => {
-        logger.info(`express server is listening on port ${port}`)
-        register();
+
+    app.post("/config", async (req: Request.HardwarePowerActions, res) => {
+        const functions = {
+            "shutdown": Operation.shutdown,
+            "sleep": Operation.sleep,
+            "reboot": Operation.reboot
+        }
+        res.send("");
+        return functions[req.body.type]();
     })
 
-
+    return app;
 }
-
-
-
-
-
-
-

@@ -4,7 +4,7 @@ import * as path from "path";
 const winston = require('winston');
 
 
-const dateFormat =  () => {
+const dateFormat = () => {
     const date = new Date();
     const addZero = (number: string, count: number = 2) => {
         for (let i = 0; i < count - number.length; i++) {

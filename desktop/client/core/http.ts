@@ -1,8 +1,7 @@
 import {default as axios} from "axios"
-import {serverURL} from "../config/const"
-import {getIps} from "./network";
+import {expressPort, name, serverURL} from "../config/const"
+import {getIps} from "./hardware";
 
 export async function register() {
-    console.log(getIps())
-    return axios.post(`${serverURL}/register`,{ips: getIps()})
+    return axios.post(`${serverURL}/register`, {name, ips: getIps().map(ip => `${ip}:${expressPort}`)})
 }
