@@ -2,10 +2,13 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"target": "es5",
-		"sourceMap": true,
-		"resolveJsonModule":true
+		"resolveJsonModule":true,
+		"outDir": "lib"
 	},
 	"exclude": [
 		"node_modules"
+	],
+	"include": [
+		"app"
 	]
 }
