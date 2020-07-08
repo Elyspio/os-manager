@@ -1,5 +1,6 @@
 import {logFolder} from "../config/const";
 import * as path from "path";
+import * as process from "process";
 
 const winston = require('winston');
 
@@ -24,28 +25,49 @@ const dateFormat = () => {
 
 const getLogFile = (...node: string[]) => path.join(logFolder, ...node)
 
-const getFormat = () => {
-    return winston.format.combine(
+const getFormat = (colorize: boolean) => {
+    const formats= [
         winston.format.timestamp({
             format: dateFormat
         }),
-        winston.format.prettyPrint({}),
-        winston.format.colorize({
+        winston.format.prettyPrint(),
+    ]
+
+    if (colorize) {
+        formats.push(winston.format.colorize({
             all: true, colors: {
                 info: "blue",
                 error: "red",
                 warning: "orange",
                 debug: "yellow"
             }
-        }),
-    );
+        }));
+    }
+
+    return  winston.format.combine(...formats);
 };
 
 function getTransports(service: string): Transport[] {
     const transports: Transport[] = [];
+    const colorFormat = getFormat(true);
+    const noColorFormat =getFormat(false);
     transports.push(
-        new winston.transports.File({filename: getLogFile(service, 'error.log'), level: 'error'}),
-        new winston.transports.File({filename: getLogFile(service, 'combined.log')}),
+        new winston.transports.File({
+            filename: getLogFile(service, 'error.color.log'), level: 'error',
+            format: colorFormat
+        }),
+        new winston.transports.File({
+            filename: getLogFile(service, 'combined.color.log'),
+            format: colorFormat
+        }),
+        new winston.transports.File({
+            filename: getLogFile(service, 'error.log'), level: 'error',
+            format: noColorFormat
+        }),
+        new winston.transports.File({
+            filename: getLogFile(service, 'combined.log'),
+            format: noColorFormat
+        }),
     )
 
     if (process.env.NODE_ENV !== "production") {
@@ -62,7 +84,6 @@ export function initLogger(service: string) {
 
 
     return winston.createLogger({
-        format: getFormat(),
         defaultMeta: {service: `@android-windows-link/desktop-${service}`},
         transports: getTransports(service),
     });

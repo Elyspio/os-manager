@@ -1,0 +1,7 @@
+{
+	"logFolder": "P:\\own\\mobile\\android-windows-link\\desktop\\logs",
+	"ports": {
+		"server": 4002,
+		"client": 4001
+	}
+}
