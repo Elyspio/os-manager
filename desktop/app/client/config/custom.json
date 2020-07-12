@@ -1,5 +1,4 @@
 {
-	"name": "aero-oled",
 	"serverUrl": {
 		"development": "http://localhost:4002",
 		"production": "http://elyspio.fr/global/android-desktop-manager"

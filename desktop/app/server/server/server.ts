@@ -1,5 +1,4 @@
 import * as express from "express"
-import {Express} from "express"
 import {logger} from "../util/logger";
 import * as  bodyParser from "body-parser";
 import {Request} from "./types";
@@ -7,11 +6,12 @@ import {ClientsManager} from "../core/clients-manager";
 import {default as axios} from "axios"
 import * as cors from "cors"
 
-export function createServer(): Express {
+export function createServer() {
     const app = express();
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json())
-    app.use(cors())
+    app.use(cors());
+
 
     app.post("/register", ((req: Request.Register, res) => {
         logger.info("register ips: ", {client: req.body})

@@ -1,6 +1,7 @@
 import {logFolder} from "../config/const";
 import * as path from "path";
 import * as process from "process";
+import * as fs from "fs"
 
 const winston = require('winston');
 
@@ -26,7 +27,7 @@ const dateFormat = () => {
 const getLogFile = (...node: string[]) => path.join(logFolder, ...node)
 
 const getFormat = (colorize: boolean) => {
-    const formats= [
+    const formats = [
         winston.format.timestamp({
             format: dateFormat
         }),
@@ -44,13 +45,17 @@ const getFormat = (colorize: boolean) => {
         }));
     }
 
-    return  winston.format.combine(...formats);
+    return winston.format.combine(...formats);
 };
 
 function getTransports(service: string): Transport[] {
     const transports: Transport[] = [];
     const colorFormat = getFormat(true);
-    const noColorFormat =getFormat(false);
+    const noColorFormat = getFormat(false);
+
+    if (!fs.existsSync(logPath)) {
+        fs.mkdirSync(logPath, {recursive: true});
+    }
     transports.push(
         new winston.transports.File({
             filename: getLogFile(service, 'error.color.log'), level: 'error',

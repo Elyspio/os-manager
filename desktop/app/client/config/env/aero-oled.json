@@ -1,0 +1,6 @@
+{
+	"name": "aero-oled",
+	"serverUrl": {
+		"production": "http://elyspi:4002"
+	}
+}
