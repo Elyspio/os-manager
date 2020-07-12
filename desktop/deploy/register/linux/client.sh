@@ -1,1 +1,2 @@
-./common.sh client
+basedir=$(dirname "$0")
+"$basedir"/common.sh client

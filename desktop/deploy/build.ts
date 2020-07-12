@@ -4,13 +4,20 @@ import * as os from "os";
 import {exec, execFile, lib, root, zip} from "./util";
 
 async function build() {
-    if((await fs.readdir(root)).includes("lib")) {
+    if ((await fs.readdir(root)).includes("lib")) {
         await fs.remove(lib)
     }
 
     const tscPath = path.resolve(root, "./node_modules/.bin/tsc" + (os.platform() === "win32" ? ".cmd" : ""));
     console.log("tsc:", tscPath);
     await execFile(tscPath, {cwd: root})
+
+    await fs.copy(path.join(root, "app"), lib, {
+        filter: src => {
+            return !src.split(path.sep).slice(-1)[0].includes(".ts")
+        }
+    })
+
     const pkg = JSON.parse((await fs.readFile(path.resolve(root, "package.json"))).toString())
     const newPkg = {
         "name": pkg.name,

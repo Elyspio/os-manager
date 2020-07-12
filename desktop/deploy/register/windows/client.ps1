@@ -1,12 +1,14 @@
 Param(
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [Switch]$remove
 )
 
-if($remove -eq $true) {
+if ($remove -eq $true)
+{
     Invoke-Expression "$PSScriptRoot/common.ps1 -mode client -remove"
 }
-else {
+else
+{
     Invoke-Expression "$PSScriptRoot/common.ps1 -mode client"
 
 }

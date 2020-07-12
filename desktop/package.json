@@ -5,10 +5,11 @@
   "license": "MIT",
   "dependencies": {
     "argparse": "^1.0.10",
+    "axios": "^0.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "winston": "^3.3.3",
-    "axios": "^0.19.2"
+    "lodash.merge": "^4.6.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.33",
@@ -17,10 +18,10 @@
     "@types/fs-extra": "^9.0.1",
     "adm-zip": "^0.4.16",
     "concurrently": "^5.2.0",
-    "fs-extra": "^9.0.1",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "fs-extra": "^9.0.1"
   },
   "scripts": {
     "dev-client": "nodemon app/client/index.ts",
