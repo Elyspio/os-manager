@@ -2,13 +2,14 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"target": "es5",
-		"resolveJsonModule":true,
+		"resolveJsonModule": true,
 		"outDir": "lib"
 	},
 	"exclude": [
-		"node_modules"
+		"./node_modules",
+		"./app/server/front"
 	],
 	"include": [
-		"app"
+		"./app"
 	]
 }

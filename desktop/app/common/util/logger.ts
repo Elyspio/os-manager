@@ -52,10 +52,13 @@ function getTransports(service: string): Transport[] {
     const transports: Transport[] = [];
     const colorFormat = getFormat(true);
     const noColorFormat = getFormat(false);
+    let logPath = path.join(logFolder, service);
 
+    console.log(`ensure ${logPath}`)
     if (!fs.existsSync(logPath)) {
         fs.mkdirSync(logPath, {recursive: true});
     }
+    console.log("exist", fs.existsSync(logPath));
     transports.push(
         new winston.transports.File({
             filename: getLogFile(service, 'error.color.log'), level: 'error',

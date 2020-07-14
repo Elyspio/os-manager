@@ -18,9 +18,9 @@ export class ClientsManager {
     }
 
     public get clients() {
-        const clients = new Map<ClientIdentifier, Client>();
-        this.internal.clients.forEach((client, id) => {
-            clients.set(id, client.clone())
+        const clients = [];
+        this.internal.clients.forEach((client) => {
+            clients.push(client.clone())
         })
         return clients;
     }
@@ -29,8 +29,14 @@ export class ClientsManager {
         return Array.from(this.instance.clients.values()).find(client => client.name === name)
     }
 
-    public register(client: ClientData) {
-        this.internal.clients.set({host: client.host}, new Client(client))
+    /**
+     * @return true if the number of clients changed
+     * @param client
+     */
+    public register(client: ClientData): boolean {
+        const originLength = this.internal.clients.size;
+        this.internal.clients.set(client.host, new Client(client))
+        return originLength !== this.internal.clients.size;
     }
 
     public toJSON() {

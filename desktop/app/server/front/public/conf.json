@@ -1,0 +1,6 @@
+{
+	"endpoints": {
+		"socket-io": "localhost:4002",
+		"api": "http://localhost:4002"
+	}
+}

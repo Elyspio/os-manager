@@ -12,44 +12,60 @@ export const getIps = (): string[] => {
 }
 
 
-const isWindows = os.platform() === "win32"
-const isLinux = os.platform() === "linux"
-
+function unSupportedPlatform() {
+    throw  new Error(`Unsupported OS ${os.platform()}`)
+}
 
 export namespace Operation {
 
+    const commands = {
+        sleep: {
+            windows: "rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
+            linux: "systemctl suspend"
+        },
+        reboot: {
+            windows: "shutdown -r -t 0",
+            linux: "/sbin/shutdown -r now"
+        },
+        shutdown: {
+            windows: "shutdown -s -t 0",
+            linux: "/sbin/shutdown now"
+        },
+        lock: {
+            windows: "rundll32.exe user32.dll,LockWorkStation",
+            linux: "gnome-screensaver-command --lock"
+        }
+    }
+
     export function sleep() {
-
-        let command;
-        if (isWindows) {
-            command = "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
+        let command = commands.sleep[os.platform()]
+        if (command) {
+            return exec(command)
         }
-        if (isLinux) {
-            command = "systemctl suspend";
-        }
-        return exec(command);
-
+        unSupportedPlatform();
     }
 
     export function shutdown() {
-        let command;
-        if (isWindows) {
-            command = "shutdown -s -t 0"
+        let command = commands.shutdown[os.platform()]
+        if (command) {
+            return exec(command)
         }
-        if (isLinux) {
-            command = "/sbin/shutdown now";
-        }
-        return exec(command);
+        unSupportedPlatform();
     }
 
     export function reboot() {
-        let command;
-        if (isWindows) {
-            command = "shutdown -r -t 0"
+        let command = commands.reboot[os.platform()]
+        if (command) {
+            return exec(command)
         }
-        if (isLinux) {
-            command = "/sbin/shutdown -r now";
+        unSupportedPlatform();
+    }
+
+    export function lock() {
+        let command = commands.lock[os.platform()]
+        if (command) {
+            return exec(command)
         }
-        return exec(command);
+        unSupportedPlatform();
     }
 }

@@ -1,3 +1,3 @@
-import * as custom from "../../common/config/custom.json"
+import * as custom from "../../common/config/const"
 
 export const expressPort = custom.ports.server;

@@ -7,14 +7,26 @@ async function build() {
     if ((await fs.readdir(root)).includes("lib")) {
         await fs.remove(lib)
     }
+    await fs.ensureDir(lib)
 
     const tscPath = path.resolve(root, "./node_modules/.bin/tsc" + (os.platform() === "win32" ? ".cmd" : ""));
-    console.log("tsc:", tscPath);
-    await execFile(tscPath, {cwd: root})
+
+    await Promise.all([
+        execFile(tscPath, {cwd: root}),
+        exec("yarn build", {cwd: path.resolve(root, "app", "server", "front"), env: {NODE_ENV: "production"}})
+    ])
+
 
     await fs.copy(path.join(root, "app"), lib, {
         filter: src => {
-            return !src.split(path.sep).slice(-1)[0].includes(".ts")
+            let pathToFront = path.resolve(root, "app", "server", "front");
+
+            if (src === pathToFront) return true;
+            if (src.includes(pathToFront) && !src.includes(path.resolve(pathToFront, "build"))) return false;
+
+            if (src.split(path.sep).slice(-1)[0].includes(".ts")) return false;
+
+            return true;
         }
     })
 

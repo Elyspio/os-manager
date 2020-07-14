@@ -16,7 +16,8 @@ export function createServer() {
         const functions = {
             "shutdown": Operation.shutdown,
             "sleep": Operation.sleep,
-            "reboot": Operation.reboot
+            "reboot": Operation.reboot,
+            "lock": Operation.lock
         }
         res.send("");
         return functions[req.body.type]();

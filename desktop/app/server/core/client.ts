@@ -1,10 +1,12 @@
-export interface ClientData extends ClientIdentifier {
-    name: string
+export interface ClientData {
+    name: string,
+    host: string,
 }
 
-export type ClientIdentifier = {
-    host: string
-}
+/**
+ * Ip of the client
+ */
+export type ClientIdentifier = string
 
 export class Client {
     private readonly data: ClientData

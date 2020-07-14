@@ -1,0 +1,53 @@
+{
+	"name": "front",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@material-ui/core": "^4.9.13",
+		"@material-ui/icons": "^4.9.1",
+		"@reduxjs/toolkit": "^1.3.5",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-redux": "^7.2.0",
+		"react-scripts": "3.4.1",
+		"redux": "^4.0.5",
+		"socket.io-client": "^2.3.0",
+		"axios": "^0.19.2"
+	},
+	"scripts": {
+		"start": "node_modules/.bin/react-scripts start",
+		"build": "node_modules/.bin/react-scripts build",
+		"test": "node_modules/.bin/react-scripts test",
+		"eject": "node_modules/.bin/react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version"
+		]
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^5.5.0",
+		"@testing-library/react": "^10.0.4",
+		"@testing-library/user-event": "^10.1.0",
+		"@types/argparse": "^1.0.38",
+		"@types/cors": "^2.8.6",
+		"@types/jest": "^25.2.1",
+		"@types/node": "^13.13.5",
+		"@types/react": "^16.9.34",
+		"@types/react-dom": "^16.9.7",
+		"@types/react-redux": "^7.1.8",
+		"@types/socket.io-client": "^1.4.33",
+		"argparse": "^1.0.10",
+		"node-sass": "^4.14.1",
+		"typescript": "latest"
+	}
+}
