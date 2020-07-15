@@ -1,5 +1,5 @@
 import {ActionReducerMapBuilder, createReducer} from "@reduxjs/toolkit";
-import {addComputer} from "./action";
+import {addComputer, removeComputer} from "./action";
 import {socket} from "../../../core/socket";
 import {socketEvents} from "../../../config/sockets";
 import store from "../../index";
@@ -30,15 +30,22 @@ export const reducer = createReducer<ComputerState>(
             }
         });
 
-
+        builder.addCase(removeComputer, (state, action) => {
+            state.computers = state.computers.filter(computer => computer.id !== action.payload.id)
+        })
     }
 );
 
-socket.on(socketEvents.updateAll, async (names: string[]) => {
-    console.log("UPDATE ALL from server", names);
+socket.on(socketEvents.updateAll, async (ids: string[]) => {
+    console.log("UPDATE ALL from server", ids);
 
-    const lights = await Promise.all(names.map(name => ComputerService.instance.get({name: name})))
+    const lights = await Promise.all(ids.map(id => ComputerService.instance.get({id: id})))
 
     store.dispatch(addComputer(lights));
+});
+
+
+socket.on(socketEvents.remove, async (id: string) => {
+    store.dispatch(removeComputer({id}));
 });
 

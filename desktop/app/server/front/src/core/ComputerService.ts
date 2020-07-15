@@ -37,7 +37,7 @@ export class ComputerService {
         return this.call(this.baseWithId(id)).then(raw => raw.data)
     }
 
-    private baseWithId = (id: ComputerIdentifier) => `${id.name}`;
+    private baseWithId = (id: ComputerIdentifier) => `${id.id}`;
 
     private call = async (url, config?: { method?: "GET" | "POST"; ignoreCallLimit?: boolean }, data?: object,) => {
 

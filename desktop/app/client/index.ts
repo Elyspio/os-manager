@@ -14,7 +14,13 @@ if (require.main === module) {
 
     app.listen(port, () => {
         logger.info(`express server is listening on port ${port}`)
-        register();
+        registerToServer()
     })
+}
+
+function registerToServer() {
+    register().then(() => {
+        setInterval(register, 5000,)
+    });
 }
 

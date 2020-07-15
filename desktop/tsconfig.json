@@ -3,7 +3,11 @@
 		"module": "commonjs",
 		"target": "es5",
 		"resolveJsonModule": true,
-		"outDir": "lib"
+		"outDir": "lib",
+		"lib": [
+			"ES2020",
+			"dom"
+		]
 	},
 	"exclude": [
 		"./node_modules",

@@ -3,8 +3,11 @@ import {setComputers, setSelectedComputer} from "./actions";
 
 export interface Computer {
     host: string,
-    name: string
+    name: string,
+    id: string
 }
+
+export type ComputerIdentifier = Pick<Computer, "id">
 
 export interface ComputerManagerState {
     current?: Computer,

@@ -20,9 +20,9 @@ export function createServer() {
 
     app.post("/register", ((req: Request.Register, res) => {
         logger.info("register", {ips: req.body})
-        const changed = ClientsManager.instance.register({name: req.body.name, host: req.body.ips[0]})
+        const changed = ClientsManager.instance.register({id: req.body.id, host: req.body.ips[0], name: req.body.name})
         if (changed) {
-            socketIoServer.sockets.emit(socketEvents.updateAll, ClientsManager.instance.clients.map(c => c.name))
+            socketIoServer.sockets.emit(socketEvents.updateAll, ClientsManager.instance.clients.map(c => c.id))
         }
         res.send("");
     }))
@@ -33,11 +33,12 @@ export function createServer() {
 
     app.get("/computers/:target", (req, res) => {
         const target = ClientsManager.get(req.params.target);
-        res.json(target);
+        res.send(target);
     })
 
 
     app.post("/computers/:target/:command", async (req: Request.ServerHardwarePowerActions, res) => {
+        logger.info("Query", {method: "POST", "param": req.params})
         const targetUrl = ClientsManager.get(req.params.target).host
         await axios.post(`http://${targetUrl}/config`, {
             type: req.params.command
@@ -51,11 +52,28 @@ export function createServer() {
 
     socketIoServer.on("connection", (socket) => {
 
-        const names = ClientsManager.instance.clients.map(c => c.name);
+        const names = ClientsManager.instance.clients.map(c => c.id);
         logger.info("client ws connection", {names})
-        socketIoServer.sockets.emit(socketEvents.updateAll, names)
+        socket.emit(socketEvents.updateAll, names)
     });
 
+
+    setInterval(async () => {
+
+        let clients = ClientsManager.instance.clients;
+        const promises = clients.map(client => axios.get(`http://${client.host}/ping`, {timeout: 250}))
+
+        const results = await Promise.allSettled(promises)
+
+        results.forEach((result, index) => {
+            if (result.status === "rejected") {
+                let client = clients[index];
+                logger.info(`Client ${client.id} is not accessible, it will be removed`)
+                ClientsManager.instance.remove(client.id)
+                socketIoServer.sockets.emit(socketEvents.remove, client.id)
+            }
+        })
+    }, 2000)
 
     return server;
 

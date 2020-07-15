@@ -3,8 +3,9 @@ import {Request} from "express";
 export namespace Request {
     export interface Register extends Request {
         body: {
-            name: string,
-            ips: string[]
+            id: string,
+            ips: string[],
+            name: string
         }
     }
 

@@ -2,6 +2,7 @@ import {logFolder} from "../config/const";
 import * as path from "path";
 import * as process from "process";
 import * as fs from "fs"
+import {transport} from "winston";
 
 const winston = require('winston');
 
@@ -48,8 +49,8 @@ const getFormat = (colorize: boolean) => {
     return winston.format.combine(...formats);
 };
 
-function getTransports(service: string): Transport[] {
-    const transports: Transport[] = [];
+function getTransports(service: string): transport[] {
+    const transports: transport[] = [];
     const colorFormat = getFormat(true);
     const noColorFormat = getFormat(false);
     let logPath = path.join(logFolder, service);

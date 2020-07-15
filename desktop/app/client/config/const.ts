@@ -9,4 +9,5 @@ const config = getCustom(__dirname, false)
 
 export const expressPort = commonCustom.ports.client;
 export let serverURL = isDev ? config.serverUrl.development : config.serverUrl.production
-export const name = config.name || os.hostname();
+export const id = os.hostname();
+export const name = config.name

@@ -18,6 +18,7 @@
     "@types/argparse": "^1.0.38",
     "@types/express": "^4.17.6",
     "@types/fs-extra": "^9.0.1",
+    "@types/node": "12.12.50",
     "adm-zip": "^0.4.16",
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.4",

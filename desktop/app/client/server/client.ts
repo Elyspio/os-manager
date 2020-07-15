@@ -23,5 +23,10 @@ export function createServer() {
         return functions[req.body.type]();
     })
 
+    app.get("/ping", (req, res) => {
+        res.json({time: Date.now()})
+    })
+
+
     return app;
 }

@@ -1,10 +1,10 @@
-export interface ClientData {
-    name: string,
-    host: string,
+import {Computer} from "../../../../mobile/app/data/computer-manager/reducer";
+
+export interface ClientData extends Computer {
 }
 
 /**
- * Ip of the client
+ * Id of the client
  */
 export type ClientIdentifier = string
 
@@ -16,15 +16,19 @@ export class Client {
     }
 
     public get host() {
-        return this.data.host
+        return this.data.host;
     }
 
     public get name() {
-        return this.data.name
+        return this.data.name;
+    }
+
+    public get id() {
+        return this.data.id;
     }
 
     public clone() {
-        return new Client(this.data)
+        return new Client(this.data);
     }
 
     public toJSON() {

@@ -17,6 +17,7 @@ StartLimitIntervalSec=0
 [Service]
 Type=simple
 User=$user
+Environment=\"NODE_ENV=production\"
 ExecStart=/usr/bin/node $dir/$1/index.js
 
 [Install]

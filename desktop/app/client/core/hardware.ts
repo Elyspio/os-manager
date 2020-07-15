@@ -20,19 +20,19 @@ export namespace Operation {
 
     const commands = {
         sleep: {
-            windows: "rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
+            win32: "rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
             linux: "systemctl suspend"
         },
         reboot: {
-            windows: "shutdown -r -t 0",
+            win32: "shutdown -r -t 0",
             linux: "/sbin/shutdown -r now"
         },
         shutdown: {
-            windows: "shutdown -s -t 0",
+            win32: "shutdown -s -t 0",
             linux: "/sbin/shutdown now"
         },
         lock: {
-            windows: "rundll32.exe user32.dll,LockWorkStation",
+            win32: "rundll32.exe user32.dll,LockWorkStation",
             linux: "gnome-screensaver-command --lock"
         }
     }

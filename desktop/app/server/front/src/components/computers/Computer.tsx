@@ -41,6 +41,7 @@ class Computer extends Component<Props> {
 
         const btnVariant = theme === "dark" ? "outlined" : "contained"
         btnTheme.palette.type = theme;
+
         return (
             <Box className={`Computer ${theme}`}>
                 <Typography className={"name"} title={data.host}>{data.name}</Typography>
