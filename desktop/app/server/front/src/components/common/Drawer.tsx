@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import _Drawer from '@material-ui/core/Drawer';
+import MuiDrawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -75,7 +75,7 @@ export default function Drawer(props: Props) {
 
         const comp = separatorIndexes.map((value, index, array) => actions.slice(value, array[index + 1]))
 
-        const actionComponents = (comp.length > 0 ? comp : [actions]).map(actions => <List key={Math.random().toString()}>
+        const actionComponents = (comp.length > 0 ? comp : [actions]).map(actions => <List className={"toolbar"} key={Math.random().toString()}>
             {actions.map(action => <ListItem button key={action.text} onClick={() => action.onClick()}>
                 <ListItemIcon>{action.icon}</ListItemIcon>
                 <ListItemText primary={action.text}/>
@@ -91,18 +91,18 @@ export default function Drawer(props: Props) {
 
     return (
         <div className={"Drawer"}>
-            <_Drawer
+            <MuiDrawer
                 anchor={props.position}
                 variant="permanent"
                 className={clsx(classes.drawer, {
                     [classes.drawerOpen]: open,
                     [classes.drawerClose]: !open,
-                })}
+                })+ "toolbar"}
                 classes={{
                     paper: clsx({
                         [classes.drawerOpen]: open,
                         [classes.drawerClose]: !open,
-                    }),
+                    }) ,
                 }}>
                 <div>
                     <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
@@ -111,7 +111,7 @@ export default function Drawer(props: Props) {
                 </div>
                 <Divider/>
                 {props.actions ? getActions(props.actions) : null}
-            </_Drawer>
+            </MuiDrawer>
             <main>
                 {props.children}
             </main>

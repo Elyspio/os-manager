@@ -15,6 +15,11 @@
 
 	}
 
+	.name {
+		width: 7rem;
+		text-overflow: ellipsis;
+	}
+
 	.actions {
 		margin-left: 2rem;
 
