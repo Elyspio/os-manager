@@ -9,4 +9,7 @@ type Config = {
         "socket-io": string
     }
 }
-export const conf: Config = JSON.parse(xmlHttpRequest.responseText);
+let rawConf = JSON.parse(xmlHttpRequest.responseText);
+export let conf: Config = rawConf.development;
+
+if (process.env.NODE_ENV === "production") conf = rawConf.production;

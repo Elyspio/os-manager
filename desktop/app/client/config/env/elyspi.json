@@ -1,6 +1,7 @@
 {
 	"name": "Elyspi",
 	"serverUrl": {
-		"production": "http://localhost:4002"
+		"production": "http://localhost:5002"
 	}
 }
+

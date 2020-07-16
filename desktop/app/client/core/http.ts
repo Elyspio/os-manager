@@ -5,5 +5,8 @@ import {logger} from "../util/logger";
 
 export async function register() {
     logger.info("register " + serverURL)
-    return axios.post(`${serverURL}/register`, {id, name, ips: getIps().map(ip => `${ip}:${expressPort}`)})
+    try {
+        await axios.post(`${serverURL}/register`, {id, name, ips: getIps().map(ip => `${ip}:${expressPort}`)})
+    } catch (e) {
+    }
 }

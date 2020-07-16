@@ -1,3 +1,7 @@
 {
-	"logFolder": "/var/apps/android-link/logs"
+	"logFolder": "/var/apps/android-link/logs",
+	"ports": {
+		"server": 5002,
+		"client": 5001
+	}
 }

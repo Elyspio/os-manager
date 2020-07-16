@@ -4,19 +4,16 @@ import {ClientsManager} from "../core/clients-manager";
 import {default as axios} from "axios"
 import * as path from "path";
 import {socketEvents} from "../config/socket";
-import {middlewares} from "./middleware";
-import {Express} from "express";
-import * as net from "net";
 import {Server as ServerIO} from "socket.io"
+import {createServer} from "../../common/util/server";
+import {Server} from "net";
 
-export function createServer() {
+export function initServer() {
     const express = require('express');
-    const app: Express = express();
-    const server: net.Server = require("http").Server(app);
-    const socketIoServer: ServerIO = require("socket.io")(server);
-
-    app.use(...middlewares);
-
+    const servers = createServer({logger: logger, cors: true, websocket: true});
+    const {express: app} = servers;
+    const socketIoServer = servers.socket as ServerIO
+    const server = servers.http as Server
 
     app.post("/register", ((req: Request.Register, res) => {
         logger.info("register", {ips: req.body})
@@ -39,7 +36,7 @@ export function createServer() {
 
     app.post("/computers/:target/:command", async (req: Request.ServerHardwarePowerActions, res) => {
         logger.info("Query", {method: "POST", "param": req.params})
-        const targetUrl = ClientsManager.get(req.params.target).host
+        const targetUrl = ClientsManager.get(req.params.target)?.host
         await axios.post(`http://${targetUrl}/config`, {
             type: req.params.command
         })

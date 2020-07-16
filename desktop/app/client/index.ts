@@ -1,5 +1,5 @@
 import {ArgumentParser} from "argparse"
-import {createServer} from "./server/client";
+import {initServer} from "./server/client";
 import {expressPort} from "./config/const";
 import {logger} from "./util/logger";
 import {register} from "./core/http";
@@ -10,7 +10,7 @@ if (require.main === module) {
     parser.addArgument("--port", {type: "int", defaultValue: expressPort})
     const {port} = parser.parseArgs();
 
-    const app = createServer()
+    const app = initServer()
 
     app.listen(port, () => {
         logger.info(`express server is listening on port ${port}`)

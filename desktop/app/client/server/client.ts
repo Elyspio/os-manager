@@ -1,16 +1,10 @@
-import * as express from "express"
-import * as  bodyParser from "body-parser";
 import {Request} from "./types";
 import {Operation} from "../core/hardware";
-import * as cors from "cors"
+import {createServer} from "../../common/util/server";
+import {logger} from "../util/logger";
 
-
-export function createServer() {
-    const app = express();
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(bodyParser.json())
-    app.use(cors());
-
+export function initServer() {
+    const {express: app} = createServer({cors: true, logger})
 
     app.post("/config", async (req: Request.HardwarePowerActions, res) => {
         const functions = {
@@ -19,8 +13,8 @@ export function createServer() {
             "reboot": Operation.reboot,
             "lock": Operation.lock
         }
-        res.send("");
-        return functions[req.body.type]();
+        functions[req.body.type]();
+        return res.send("");
     })
 
     app.get("/ping", (req, res) => {

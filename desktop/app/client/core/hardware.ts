@@ -1,7 +1,7 @@
 import * as os from "os";
 import {exec} from "../../common/util/hardware";
 
-export const getIps = (): string[] => {
+export const getIps = (): (string | undefined)[] => {
 
     const raw = os.networkInterfaces()
     const interfaces = Object.keys(raw);

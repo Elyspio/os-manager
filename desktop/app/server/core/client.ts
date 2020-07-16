@@ -1,6 +1,7 @@
-import {Computer} from "../../../../mobile/app/data/computer-manager/reducer";
-
-export interface ClientData extends Computer {
+export interface ClientData {
+    host: string,
+    name: string,
+    id: string
 }
 
 /**
