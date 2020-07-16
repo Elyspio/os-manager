@@ -1,7 +1,6 @@
 {
   "name": "@android-windows-link/desktop",
   "version": "1.0.0",
-  "main": "index.ts",
   "license": "MIT",
   "dependencies": {
     "argparse": "^1.0.10",

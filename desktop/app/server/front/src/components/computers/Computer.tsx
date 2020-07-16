@@ -23,10 +23,6 @@ interface Props extends ReduxTypes {
     data: IComputer
 }
 
-const success = {borderColor: "green", color: "green"};
-const warning = {borderColor: "orange", color: "orange"};
-const danger = {borderColor: "red", color: "red"};
-
 const btnTheme = createMuiTheme({
     palette: {
         primary: {main: '#aad7ff'},

@@ -1,7 +1,7 @@
 import * as path from "path";
 import {promises as fs} from "fs"
 import {exec as _exec, execFile as _execFile, ExecOptions} from "child_process";
-import * as AdmZip from "adm-zip"
+import AdmZip from "adm-zip"
 
 export async function exec(command: string, option?: ExecOptions) {
     return new Promise((resolve, reject) => {

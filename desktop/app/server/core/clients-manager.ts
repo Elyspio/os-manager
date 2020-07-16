@@ -18,7 +18,7 @@ export class ClientsManager {
     }
 
     public get clients(): Client[] {
-        const clients = [];
+        const clients: Client[] = [];
         this.internal.clients.forEach((client) => {
             clients.push(client.clone())
         })
@@ -40,16 +40,9 @@ export class ClientsManager {
     }
 
     public toJSON() {
-        const obj = {
-            clients: []
+        return {
+            clients: Array.from(this.internal.clients.values()).map(val => val.toJSON())
         };
-
-        this.internal.clients.forEach((val, key) => {
-            obj.clients.push(val.toJSON());
-        })
-
-        return obj;
-
     }
 
     public remove(id: string) {

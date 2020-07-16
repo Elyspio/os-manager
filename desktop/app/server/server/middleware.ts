@@ -1,7 +1,8 @@
 const bodyParser = require("body-parser")
+import {NextFunction} from "express"
 
 const cors = require("cors");
-export const middlewares = [];
+export const middlewares: NextFunction[] = [];
 // middlewares.push(logger({
 // 	transports: [
 // 		new winston.transports.Console()

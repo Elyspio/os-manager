@@ -1,6 +1,5 @@
 import {logFolder} from "../config/const";
 import * as path from "path";
-import * as process from "process";
 import * as fs from "fs"
 import {transport} from "winston";
 
@@ -38,10 +37,11 @@ const getFormat = (colorize: boolean) => {
     if (colorize) {
         formats.push(winston.format.colorize({
             all: true, colors: {
-                info: "blue",
-                error: "red",
+                info: "cyan",
+                request: "green",
+                debug: "yellow",
                 warning: "orange",
-                debug: "yellow"
+                error: "red",
             }
         }));
     }
@@ -79,11 +79,9 @@ function getTransports(service: string): transport[] {
         }),
     )
 
-    if (process.env.NODE_ENV !== "production") {
-        transports.push(
-            new winston.transports.Console({})
-        )
-    }
+    transports.push(
+        new winston.transports.Console({})
+    )
 
     return transports;
 }
@@ -94,7 +92,15 @@ export function initLogger(service: string) {
 
     return winston.createLogger({
         defaultMeta: {service: `@android-windows-link/desktop-${service}`},
+        levels: {
+            info: 3,
+            request: 4,
+            debug: 2,
+            warning: 1,
+            error: 0,
+        },
         transports: getTransports(service),
+        level: "request"
     });
 
 }
