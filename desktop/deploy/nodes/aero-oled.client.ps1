@@ -1,7 +1,15 @@
+param (
+    [Switch] $nobuild
+)
+
+
 $origin = Get-Location
 
 cd $PSScriptRoot/../../
-npm run build
+
+if(! $nobuild.IsPresent) {
+    npm run build
+}
 
 Invoke-Expression  "./lib/register/windows/client.ps1 -remove"
 
