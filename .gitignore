@@ -1,9 +1,17 @@
-node_modules
-*.js
-logs
 .idea
-lib
-package-lock.json
-*.d.ts
-*.js.map
-desktop/app/server/front/build
+
+# TypeScript (front)
+node_modules
+*/build
+*.map
+
+
+# C# (back)
+.vs
+app/back/*/bin
+app/*/obj
+
+# Production configuration
+deploy/prod/.env
+deploy/prod/config/front/conf.js
+deploy/prod/config/back/appsettings.json

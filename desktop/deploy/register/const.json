@@ -1,5 +1,0 @@
-{
-	"server": "AndroidWindowsLink-Service",
-	"client": "AndroidWindowsLink-Client",
-	"linuxPath": "/var/apps/android-link"
-}

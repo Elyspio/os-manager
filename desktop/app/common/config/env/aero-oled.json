@@ -1,7 +1,0 @@
-{
-	"logFolder": "S:\\apps\\android-link\\logs",
-	"ports": {
-		"server": 5002,
-		"client": 5001
-	}
-}
