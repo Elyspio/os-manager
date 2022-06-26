@@ -1,14 +1,24 @@
-# android-windows-link
+# OS Manager
 
 Link between android and desktop users
-Relies on Expo for android app and express for desktop
+Relies on Expo for the android app and C# / React (TypeScript) for desktop
 
-## Features 
+## Features
 
-- Hardware power actions :
-    - Shutdown (todo)
-    - Sleep (todo)
-    - Hibernate (todo)
-- Software power actions
-    - Change CPU speed (todo)
-    
+
+### Common
+
+Hardware power actions :
+- Shutdown (todo)
+- Sleep (todo)
+- Hibernate (todo)
+- Start or stop processes
+
+
+### Windows
+- Powerplan (todo)
+
+### Linux
+
+- Change CPU speed (todo)
+

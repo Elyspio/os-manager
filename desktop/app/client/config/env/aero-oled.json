@@ -1,6 +1,0 @@
-{
-	"name": "Aero OLED",
-	"serverUrl": {
-		"production": "http://elyspi:5002"
-	}
-}
