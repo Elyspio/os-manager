@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Abstractions\OsManager.Api.Abstractions.csproj" />
+    <ProjectReference Include="..\Abstractions\OsAgent.Api.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

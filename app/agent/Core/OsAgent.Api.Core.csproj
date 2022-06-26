@@ -15,13 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Abstractions\OsManager.Api.Abstractions.csproj" />
-    <ProjectReference Include="..\Adapters\OsManager.Api.Adapters.csproj" />
+    <Folder Include="Assemblers\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assemblers\" />
-    <Folder Include="Exceptions\" />
+    <ProjectReference Include="..\Abstractions\OsAgent.Api.Abstractions.csproj" />
+    <ProjectReference Include="..\Adapters\OsAgent.Api.Adapters.csproj" />
   </ItemGroup>
 
 </Project>
