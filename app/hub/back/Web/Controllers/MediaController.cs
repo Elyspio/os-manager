@@ -1,63 +1,64 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OsAgent.Api.Abstractions.Enums;
-using OsAgent.Api.Abstractions.Interfaces.Services;
-using OsAgent.Api.Web.Controllers.Internal;
-using OsAgent.Api.Web.Filters;
+using OsHub.Api.Abstractions.Enums;
+using OsHub.Api.Abstractions.Interfaces.Services;
+using OsHub.Api.Web.Controllers.Internal;
+using OsHub.Api.Web.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace OsAgent.Api.Web.Controllers;
-
-[ApiController]
-[Route("api/media")]
-[RequireAuth]
-public class MediaController : ApiController
+namespace OsHub.Api.Web.Controllers
 {
-	private readonly IMediaService mediaService;
-
-	public MediaController(IMediaService mediaService)
+	[ApiController]
+	[Route("api/media/{id:guid}")]
+	[RequireAuth]
+	public class MediaController : ApiController
 	{
-		this.mediaService = mediaService;
-	}
+		private readonly IMediaService mediaService;
 
-	[HttpPut("volume/{modifier}")]
-	[SwaggerResponse(204)]
-	public async Task<IActionResult> ChangeVolume([FromRoute] VolumeModifier modifier)
-	{
-		await mediaService.ChangeVolume(Token!, modifier);
-		return NoContent();
-	}
+		public MediaController(IMediaService mediaService)
+		{
+			this.mediaService = mediaService;
+		}
 
-
-	[HttpPost("move/next")]
-	[SwaggerResponse(204)]
-	public async Task<IActionResult> MoveNext()
-	{
-		await mediaService.MoveNext(Token!);
-		return NoContent();
-	}
-
-	[HttpPost("move/previous")]
-	[SwaggerResponse(204)]
-	public async Task<IActionResult> MovePrevious()
-	{
-		await mediaService.MovePrevious(Token!);
-		return NoContent();
-	}
+		[HttpPut("volume/{modifier}")]
+		[SwaggerResponse(204)]
+		public async Task<IActionResult> ChangeVolume([FromRoute] Guid id, [FromRoute] VolumeModifier modifier)
+		{
+			await mediaService.ChangeVolume(Token!, modifier, id);
+			return NoContent();
+		}
 
 
-	[HttpPost("stop")]
-	[SwaggerResponse(204)]
-	public async Task<IActionResult> StopMedia()
-	{
-		await mediaService.Stop(Token!);
-		return NoContent();
-	}
+		[HttpPost("move/next")]
+		[SwaggerResponse(204)]
+		public async Task<IActionResult> MoveNext([FromRoute] Guid id)
+		{
+			await mediaService.MoveNext(Token!, id);
+			return NoContent();
+		}
 
-	[HttpPost("toggle")]
-	[SwaggerResponse(204)]
-	public async Task<IActionResult> ToggleMedia()
-	{
-		await mediaService.Toggle(Token!);
-		return NoContent();
+		[HttpPost("move/previous")]
+		[SwaggerResponse(204)]
+		public async Task<IActionResult> MovePrevious([FromRoute] Guid id)
+		{
+			await mediaService.MovePrevious(Token!, id);
+			return NoContent();
+		}
+
+
+		[HttpPost("stop")]
+		[SwaggerResponse(204)]
+		public async Task<IActionResult> StopMedia([FromRoute] Guid id)
+		{
+			await mediaService.Stop(Token!, id);
+			return NoContent();
+		}
+
+		[HttpPost("toggle")]
+		[SwaggerResponse(204)]
+		public async Task<IActionResult> ToggleMedia([FromRoute] Guid id)
+		{
+			await mediaService.Toggle(Token!, id);
+			return NoContent();
+		}
 	}
 }

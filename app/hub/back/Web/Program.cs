@@ -1,3 +1,3 @@
-using OsAgent.Api.Web.Server;
+using OsHub.Api.Web.Server;
 
 new ServerBuilder(args).Application.Initialize().Run();

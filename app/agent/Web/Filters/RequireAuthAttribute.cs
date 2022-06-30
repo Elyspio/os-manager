@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.OpenApi.Models;
-using OsHub.Api.Abstractions.Interfaces.Services;
-using OsHub.Api.Web.Utils;
+using OsAgent.Api.Web.Utils;
+using OsAgent.Api.Abstractions.Interfaces.Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace OsHub.Api.Web.Filters;
+namespace OsAgent.Api.Web.Filters;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class RequireAuthAttribute : ActionFilterAttribute

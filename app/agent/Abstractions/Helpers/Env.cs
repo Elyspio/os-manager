@@ -2,17 +2,13 @@
 
 namespace OsAgent.Api.Abstractions.Helpers;
 
-public class Env
+public static class Env
 {
-	public static T Get<T>(string variableName, T falback)
+	public static T Get<T>(string variableName, T fallback)
 	{
 		var env = Environment.GetEnvironmentVariable(variableName);
-		if (env != null)
-		{
-			var converter = TypeDescriptor.GetConverter(typeof(T));
-			return (T) converter.ConvertFromString(env)!;
-		}
-
-		return falback;
+		if (env == null) return fallback;
+		var converter = TypeDescriptor.GetConverter(typeof(T));
+		return (T) converter.ConvertFromString(env)!;
 	}
 }

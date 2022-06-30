@@ -2,14 +2,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using OsHub.Api.Abstractions.Interfaces.Injections;
 
-namespace OsHub.Api.Core.Injections;
-
-public class OsHubApiCoreModule : IDotnetModule
+namespace OsHub.Api.Core.Injections
 {
-	public void Load(IServiceCollection services, IConfiguration configuration)
+	public class OsHubApiCoreModule : IDotnetModule
 	{
-		var nsp = typeof(OsHubApiCoreModule).Namespace!;
-		var baseNamespace = nsp[..nsp.LastIndexOf(".")];
-		services.Scan(scan => scan.FromAssemblyOf<OsHubApiCoreModule>().AddClasses(classes => classes.InNamespaces(baseNamespace + ".Services")).AsImplementedInterfaces().WithSingletonLifetime());
+		public void Load(IServiceCollection services, IConfiguration configuration)
+		{
+			var nsp = typeof(OsHubApiCoreModule).Namespace!;
+			var baseNamespace = nsp[..nsp.LastIndexOf(".")];
+			services.Scan(scan => scan.FromAssemblyOf<OsHubApiCoreModule>().AddClasses(classes => classes.InNamespaces(baseNamespace + ".Services")).AsImplementedInterfaces().WithSingletonLifetime());
+		}
 	}
 }

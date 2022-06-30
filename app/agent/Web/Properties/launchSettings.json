@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "OS.Hub": {
+    "OS.Agent": {
       "commandName": "Project",
       "launchUrl": "swagger",
       "environmentVariables": {

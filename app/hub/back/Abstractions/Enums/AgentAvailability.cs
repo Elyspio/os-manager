@@ -1,8 +1,9 @@
-﻿namespace OsHub.Api.Abstractions.Enums;
-
-public enum AgentAvailability
+﻿namespace OsHub.Api.Abstractions.Enums
 {
-	Down,
-	Running,
-	Free
+	public enum AgentAvailability
+	{
+		Down,
+		Running,
+		Free
+	}
 }

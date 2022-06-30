@@ -27,9 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Abstractions\OsAgent.Api.Abstractions.csproj" />
-    <ProjectReference Include="..\Adapters\OsAgent.Api.Adapters.csproj" />
-    <ProjectReference Include="..\Core\OsAgent.Api.Core.csproj" />
+    <ProjectReference Include="..\Abstractions\OsHub.Api.Abstractions.csproj" />
+    <ProjectReference Include="..\Adapters\OsHub.Api.Adapters.csproj" />
+    <ProjectReference Include="..\Core\OsHub.Api.Core.csproj" />
+    <ProjectReference Include="..\Db\OsHub.Api.Db.csproj" />
   </ItemGroup>
 
 </Project>

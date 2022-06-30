@@ -4,7 +4,7 @@ using OsAgent.Api.Abstractions.Configs;
 using OsAgent.Api.Abstractions.Enums;
 using OsAgent.Api.Abstractions.Interfaces.Services;
 using OsAgent.Api.Core.Services.Internal;
-using OsManager.Api.Adapters.RunnerApi;
+using OsAgent.Api.Adapters.RunnerApi;
 
 namespace OsAgent.Api.Core.Services;
 

@@ -1,4 +1,4 @@
-﻿namespace OsHub.Api.Web.Utils;
+﻿namespace OsAgent.Api.Web.Utils;
 
 public static class AuthHelper
 {

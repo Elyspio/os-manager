@@ -1,7 +1,8 @@
-﻿namespace OsHub.Api.Abstractions.Interfaces.Services;
-
-public interface IAuthenticationService
+﻿namespace OsHub.Api.Abstractions.Interfaces.Services
 {
-	Task<bool> IsLogged(string token);
-	Task<string> GetUsername(string token);
+	public interface IAuthenticationService
+	{
+		Task<bool> IsLogged(string token);
+		Task<string> GetUsername(string token);
+	}
 }

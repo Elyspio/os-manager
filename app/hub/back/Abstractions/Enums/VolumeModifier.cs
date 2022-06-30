@@ -1,8 +1,9 @@
-﻿namespace OsHub.Api.Abstractions.Enums;
-
-public enum VolumeModifier
+﻿namespace OsHub.Api.Abstractions.Enums
 {
-	Up,
-	Down,
-	Mute
+	public enum VolumeModifier
+	{
+		Up,
+		Down,
+		Mute
+	}
 }

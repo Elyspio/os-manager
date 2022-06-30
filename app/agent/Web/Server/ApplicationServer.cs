@@ -1,4 +1,6 @@
-﻿namespace OsHub.Api.Web.Server;
+﻿using OsAgent.Api.Adapters.Socket;
+
+namespace OsAgent.Api.Web.Server;
 
 public static class ApplicationServer
 {
@@ -33,6 +35,9 @@ public static class ApplicationServer
 
 			application.UseEndpoints(endpoints => { endpoints.MapFallbackToFile("/index.html"); });
 		}
+
+
+		application.Services.CreateScope().ServiceProvider.GetRequiredService<HubSocket>().Connect();
 
 		return application;
 	}

@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace OsAgent.Api.Web.Utils;
-
-public class ControllerDocumentationConvention : IControllerModelConvention
+namespace OsHub.Api.Web.Utils
 {
-	void IControllerModelConvention.Apply(ControllerModel controller)
+	public class ControllerDocumentationConvention : IControllerModelConvention
 	{
-		if (controller == null) return;
+		void IControllerModelConvention.Apply(ControllerModel controller)
+		{
+			if (controller == null) return;
 
-		foreach (var attribute in controller.Attributes)
-			if (attribute.GetType() == typeof(RouteAttribute))
-			{
-				var routeAttribute = (RouteAttribute) attribute;
-				if (!string.IsNullOrWhiteSpace(routeAttribute.Name)) controller.ControllerName = routeAttribute.Name;
-			}
+			foreach (var attribute in controller.Attributes)
+				if (attribute.GetType() == typeof(RouteAttribute))
+				{
+					var routeAttribute = (RouteAttribute) attribute;
+					if (!string.IsNullOrWhiteSpace(routeAttribute.Name)) controller.ControllerName = routeAttribute.Name;
+				}
+		}
 	}
 }

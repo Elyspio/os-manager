@@ -4,14 +4,14 @@ using OsAgent.Api.Abstractions.Interfaces.Injections;
 
 namespace OsAgent.Api.Core.Injections;
 
-public class OsManagerApiCoreModule : IDotnetModule
+public class OsAgentApiCoreModule : IDotnetModule
 {
 	public void Load(IServiceCollection services, IConfiguration configuration)
 	{
-		var nsp = typeof(OsManagerApiCoreModule).Namespace!;
+		var nsp = typeof(OsAgentApiCoreModule).Namespace!;
 		var baseNamespace = nsp[..nsp.LastIndexOf(".")];
 		services.Scan(scan => scan
-			.FromAssemblyOf<OsManagerApiCoreModule>()
+			.FromAssemblyOf<OsAgentApiCoreModule>()
 			.AddClasses(classes => classes.InNamespaces(baseNamespace + ".Services"))
 			.AsImplementedInterfaces()
 			.WithSingletonLifetime()

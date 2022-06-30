@@ -1,0 +1,362 @@
+﻿{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OS Agent API",
+    "version": "1"
+  },
+  "paths": {
+    "/api/media/volume/{modifier}": {
+      "put": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "ChangeVolume",
+        "parameters": [
+          {
+            "name": "modifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/VolumeModifier"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/media/move/next": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "MoveNext",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/media/move/previous": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "MovePrevious",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/media/stop": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "StopMedia",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/media/toggle": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "ToggleMedia",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/system/shutdown": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "Shutdown",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/system/sleep": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "Sleep",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/system/restart": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "Restart",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/system/lock": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "Lock",
+        "parameters": [
+          {
+            "name": "authentication-token",
+            "in": "header",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authentication-token",
+            "in": "cookie",
+            "description": "Authentication Token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "VolumeModifier": {
+        "type": "string",
+        "enum": [
+          "Up",
+          "Down",
+          "Mute"
+        ]
+      }
+    }
+  }
+}

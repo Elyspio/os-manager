@@ -5,17 +5,16 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
-using OsHub.Api.Abstractions.Commons.Configs;
-using OsHub.Api.Abstractions.Commons.Helpers;
-using OsHub.Api.Abstractions.Enums;
-using OsHub.Api.Abstractions.Interfaces.Injections;
-using OsHub.Api.Adapters.Injections;
-using OsHub.Api.Core.Injections;
-using OsHub.Api.Db.Injections;
-using OsHub.Api.Web.Filters;
-using OsHub.Api.Web.Utils;
+using OsAgent.Api.Web.Filters;
+using OsAgent.Api.Web.Utils;
+using OsAgent.Api.Abstractions.Configs;
+using OsAgent.Api.Abstractions.Enums;
+using OsAgent.Api.Abstractions.Helpers;
+using OsAgent.Api.Abstractions.Interfaces.Injections;
+using OsAgent.Api.Adapters.Injections;
+using OsAgent.Api.Core.Injections;
 
-namespace OsHub.Api.Web.Server;
+namespace OsAgent.Api.Web.Server;
 
 public class ServerBuilder
 {
@@ -50,10 +49,18 @@ public class ServerBuilder
 		);
 
 
-		builder.Services.AddModule<OsHubApiAdapterModule>(builder.Configuration);
-		builder.Services.AddModule<OsHubApiCoreModule>(builder.Configuration);
-		builder.Services.AddModule<OsHubApiDatabaseModule>(builder.Configuration);
-		builder.Services.Configure<AppConfig>(config => { config.Platform = builder.Configuration["Platform"] == "Windows" ? ApplicationPlatform.Windows : ApplicationPlatform.Linux; });
+		builder.Services.AddModule<OsAgentApiAdapterModule>(builder.Configuration);
+		builder.Services.AddModule<OsAgentApiCoreModule>(builder.Configuration);
+		builder.Services.Configure<AppConfig>(config => {
+			config.Platform = builder.Configuration["Platform"] == "Windows" ? ApplicationPlatform.Windows : ApplicationPlatform.Linux;
+			config.HubConfig = new HubConfig();
+			builder.Configuration.GetSection("Hub").Bind(config.HubConfig);
+			config.HubConfig.Hostname ??= Dns.GetHostName();
+			
+			config.ApplicationUrl = builder.Environment.IsDevelopment() ? $"http://localhost:{port}" : $"http://{Dns.GetHostName()}:{port}";
+
+
+		});
 
 
 		// Setup Logging
@@ -83,7 +90,7 @@ public class ServerBuilder
 						}
 					);
 
-				options.SwaggerDoc("v1", new OpenApiInfo {Title = "OS Hub API", Version = "1"});
+				options.SwaggerDoc("v1", new OpenApiInfo {Title = "OS Agent API", Version = "1"});
 
 				options.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["action"]}");
 

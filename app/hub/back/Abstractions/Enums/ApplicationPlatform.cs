@@ -1,7 +1,8 @@
-﻿namespace OsHub.Api.Abstractions.Enums;
-
-public enum ApplicationPlatform
+﻿namespace OsHub.Api.Abstractions.Enums
 {
-	Windows,
-	Linux
+	public enum ApplicationPlatform
+	{
+		Windows,
+		Linux
+	}
 }

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OsHub.Api.Abstractions.Transports;
-
-public class Agent : AgentRaw
+namespace OsHub.Api.Abstractions.Transports
 {
-	[Required] public Guid Id { get; set; }
+	public class Agent : AgentRaw
+	{
+		[Required] public Guid Id { get; set; }
+	}
 }

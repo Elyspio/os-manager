@@ -1,12 +1,13 @@
 ﻿using OsHub.Api.Abstractions.Enums;
 
-namespace OsHub.Api.Abstractions.Interfaces.Services;
-
-public interface IMediaService
+namespace OsHub.Api.Abstractions.Interfaces.Services
 {
-	Task Stop(string token, Guid guid);
-	Task Toggle(string token, Guid guid);
-	Task MoveNext(string token, Guid guid);
-	Task MovePrevious(string token, Guid guid);
-	Task ChangeVolume(string token, VolumeModifier volume, Guid guid);
+	public interface IMediaService
+	{
+		Task Stop(string token, Guid id);
+		Task Toggle(string token, Guid id);
+		Task MoveNext(string token, Guid id);
+		Task MovePrevious(string token, Guid id);
+		Task ChangeVolume(string token, VolumeModifier volume, Guid id);
+	}
 }

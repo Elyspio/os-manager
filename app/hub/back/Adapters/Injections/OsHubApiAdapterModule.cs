@@ -5,18 +5,19 @@ using OsHub.Api.Abstractions.Interfaces.Injections;
 using OsHub.Api.Adapters.Configs;
 using OsManager.Api.Adapters.RunnerApi;
 
-namespace OsHub.Api.Adapters.Injections;
-
-public class OsHubApiAdapterModule : IDotnetModule
+namespace OsHub.Api.Adapters.Injections
 {
-	public void Load(IServiceCollection services, IConfiguration configuration)
+	public class OsHubApiAdapterModule : IDotnetModule
 	{
-		var conf = new EndpointConfig();
-		configuration.GetSection(EndpointConfig.Section).Bind(conf);
+		public void Load(IServiceCollection services, IConfiguration configuration)
+		{
+			var conf = new EndpointConfig();
+			configuration.GetSection(EndpointConfig.Section).Bind(conf);
 
-		services.AddHttpClient<IUsersClient, UsersClient>(client => { client.BaseAddress = new Uri(conf.Authentication); });
-		services.AddHttpClient<IAuthenticationClient, AuthenticationClient>(client => { client.BaseAddress = new Uri(conf.Authentication); });
+			services.AddHttpClient<IUsersClient, UsersClient>(client => { client.BaseAddress = new Uri(conf.Authentication); });
+			services.AddHttpClient<IAuthenticationClient, AuthenticationClient>(client => { client.BaseAddress = new Uri(conf.Authentication); });
 
-		services.AddHttpClient<IRunnerApi, RunnerApi>(client => { client.BaseAddress = new Uri(conf.Runner); });
+			services.AddHttpClient<IRunnerApi, RunnerApi>(client => { client.BaseAddress = new Uri(conf.Runner); });
+		}
 	}
 }

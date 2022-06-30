@@ -1,9 +1,10 @@
-﻿namespace OsHub.Api.Adapters.Configs;
-
-public class EndpointConfig
+﻿namespace OsHub.Api.Adapters.Configs
 {
-	public const string Section = "Endpoints";
-	public string Authentication { get; set; }
+	public class EndpointConfig
+	{
+		public const string Section = "Endpoints";
+		public string Authentication { get; set; }
 
-	public string Runner { get; set; }
+		public string Runner { get; set; }
+	}
 }
